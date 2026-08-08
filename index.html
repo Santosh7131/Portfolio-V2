@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      AFTER DEPLOY: swap https://REPLACE-ME.vercel.app for the real origin
+      Vercel assigns (or the custom domain, if one is added later).
+      Four tags carry it — canonical, og:url, og:image, twitter:image. (A grep
+      reports six hits; the other two are this note.) Open Graph and Twitter
+      need ABSOLUTE URLs, so a root-relative path silently yields no preview
+      image at all.
+          grep -n "REPLACE-ME" index.html
+    -->
+
+    <title>Santosh — Machine learning engineer</title>
+    <meta
+      name="description"
+      content="Santosh — machine learning engineer in Chennai. Thirty-two fine-tuned models, seven gigabytes, no GPU. A scroll-driven portfolio built as its own work sample."
+    />
+    <link rel="canonical" href="https://REPLACE-ME.vercel.app/" />
+
+    <!-- Declared here as well as in global.css so the very first paint is
+         already dark. The stylesheet lands a beat later, and a white flash on
+         a black cover is the one loading artefact a reader always notices. -->
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#07080b" />
+
+    <!-- The mark is Fraunces' 'S' at the cover's own cut, outlined so it needs
+         no font. Both files come from scripts/build-brand-assets.py. -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Santosh" />
+    <meta property="og:title" content="Santosh — Machine learning engineer" />
+    <meta
+      property="og:description"
+      content="Machine learning that runs on ordinary hardware. Thirty-two fine-tuned models, seven gigabytes, no GPU."
+    />
+    <meta property="og:url" content="https://REPLACE-ME.vercel.app/" />
+    <meta property="og:image" content="https://REPLACE-ME.vercel.app/assets/og-cover.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Dark cover reading Santosh — machine learning engineer, Chennai, India — machine learning that runs on ordinary hardware."
+    />
+
+    <!-- Twitter / X. No site or creator handle: none is on record, and a
+         guessed @name resolves to someone else's account. -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Santosh — Machine learning engineer" />
+    <meta
+      name="twitter:description"
+      content="Machine learning that runs on ordinary hardware. Thirty-two fine-tuned models, seven gigabytes, no GPU."
+    />
+    <meta name="twitter:image" content="https://REPLACE-ME.vercel.app/assets/og-cover.png" />
+    <meta
+      name="twitter:image:alt"
+      content="Dark cover reading Santosh — machine learning engineer, Chennai, India — machine learning that runs on ordinary hardware."
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

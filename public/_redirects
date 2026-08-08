@@ -1,0 +1,18 @@
+# Cloudflare Pages routing.
+#
+# /arcade is a client-side route: it exists only once React Router mounts, and
+# there is no /arcade/index.html on disk. A static host asked for that path
+# finds no file and serves its 404, so the easter egg is reachable by typing
+# `idkfa` but NOT by opening the URL directly or reloading the page.
+#
+# The 200 is the whole point. A 302 to / would bounce the visitor to the cover
+# and lose the path; a 200 rewrite serves the shell while the browser keeps the
+# URL, so the router still sees /arcade and renders it.
+#
+# Static assets are matched before these rules, so /assets/* — including the
+# hashed JS/CSS, the .jsdos bundle, og-cover.png and the résumé PDF — keep
+# being served as themselves rather than falling through to the shell.
+#
+# Vite copies public/ verbatim into dist/, which puts this file at the root of
+# the deployed output where Pages expects it.
+/*  /index.html  200

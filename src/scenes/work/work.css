@@ -1,0 +1,318 @@
+/*
+ * Scene 02 — Work. The AI engine is the centrepiece; XtractIQ and AURA are a
+ * deliberately smaller secondary tier below the rule. The status line is set
+ * as body copy, not a footnote — "not yet deployed" is load-bearing, not a
+ * disclaimer to be hidden.
+ */
+
+.wk-scene {
+  --wk-ink: oklch(0.96 0.004 262);
+  --wk-ink-body: oklch(0.87 0.005 262);
+  --wk-muted: oklch(0.63 0.008 262);
+  --wk-hairline: oklch(0.95 0.01 262 / 0.16);
+  --wk-accent: oklch(0.72 0.17 262);
+  --wk-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  background: oklch(0.145 0.006 262);
+  color: var(--wk-ink-body);
+  font-family: var(--font-body);
+}
+
+.wk-scene .scene-stage {
+  display: grid;
+}
+
+.wk-spread {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows:
+    auto /* 1 · kicker | eyebrow */
+    auto /* 2 · heading */
+    auto /* 3 · standfirst */
+    auto /* 4 · figures */
+    auto /* 5 · note | status */
+    1fr /* 6 · slack */
+    auto /* 7 · hairline */
+    auto; /* 8 · secondary tier */
+  column-gap: clamp(16px, 2.2vw, 32px);
+  row-gap: clamp(10px, 1.7vh, 22px);
+  width: min(1400px, 100%);
+  margin-inline: auto;
+  padding: clamp(28px, 4.2vh, 56px) var(--page-gutter);
+}
+
+/* ---------- Head ---------- */
+
+.wk-kicker,
+.wk-eyebrow {
+  grid-row: 1;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.wk-kicker {
+  grid-column: 1 / span 6;
+  color: var(--wk-accent);
+}
+
+.wk-eyebrow {
+  grid-column: 7 / -1;
+  color: var(--wk-muted);
+  text-align: right;
+}
+
+.wk-heading {
+  grid-column: 1 / span 9;
+  grid-row: 2;
+  margin-top: clamp(6px, 1.2vh, 14px);
+  font-family: var(--font-display);
+  font-variation-settings:
+    'opsz' 144,
+    'wght' 340,
+    'SOFT' 0,
+    'WONK' 1;
+  font-size: clamp(1.875rem, 4.2vw, 3.25rem);
+  line-height: 1.03;
+  letter-spacing: -0.03em;
+  color: var(--wk-ink);
+}
+
+/* Authored breaks, as elsewhere on the site. */
+.wk-heading-line {
+  display: block;
+}
+
+.wk-standfirst {
+  grid-column: 1 / span 7;
+  grid-row: 3;
+  max-width: 62ch;
+  margin-top: clamp(8px, 1.4vh, 16px);
+  font-size: clamp(0.9375rem, 1.05vw, 1.0625rem);
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+/* ---------- Figures ---------- */
+
+.wk-figures {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-row: 4;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  column-gap: clamp(16px, 2.2vw, 32px);
+  margin-top: clamp(10px, 1.8vh, 22px);
+  padding-top: clamp(12px, 1.8vh, 18px);
+  border-top: 1px solid var(--wk-hairline);
+}
+
+.wk-figure-value {
+  font-family: var(--font-display);
+  font-variation-settings:
+    'opsz' 100,
+    'wght' 380,
+    'SOFT' 0,
+    'WONK' 0;
+  font-size: clamp(1.5rem, 2.4vw, 2.125rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: var(--wk-ink);
+}
+
+.wk-figure-label {
+  margin-top: 5px;
+  max-width: 26ch;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--wk-muted);
+  text-wrap: pretty;
+}
+
+/* ---------- Note + status ---------- */
+
+.wk-notes {
+  display: grid;
+  grid-column: 1 / span 6;
+  grid-row: 5;
+  align-self: start;
+  gap: clamp(9px, 1.5vh, 15px);
+  margin-top: clamp(8px, 1.6vh, 18px);
+}
+
+.wk-note {
+  max-width: 56ch;
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.wk-status {
+  grid-column: 8 / -1;
+  grid-row: 5;
+  align-self: start;
+  max-width: 34ch;
+  margin-top: clamp(8px, 1.6vh, 18px);
+  font-size: 0.8125rem;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--wk-muted);
+  text-wrap: pretty;
+}
+
+/* ---------- Secondary tier ---------- */
+
+.wk-rule {
+  display: block;
+  grid-column: 1 / -1;
+  grid-row: 7;
+  height: 1px;
+  background: var(--wk-hairline);
+  transform-origin: left center;
+}
+
+.wk-seconds {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-row: 8;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(16px, 2.2vw, 32px);
+  row-gap: 16px;
+  list-style: none;
+}
+
+.wk-second-name {
+  font-family: var(--font-display);
+  font-variation-settings:
+    'opsz' 72,
+    'wght' 400,
+    'SOFT' 0,
+    'WONK' 0;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+  color: var(--wk-ink);
+}
+
+/* The project name is the affordance. Accent is spent only on its interactive
+ * state, as in the closing scene — the two link treatments should read as the
+ * same gesture at different scales. Durations are zeroed by global.css under
+ * either reduced-motion signal. */
+.wk-second-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  color: inherit;
+  text-decoration-color: var(--wk-hairline);
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 240ms var(--wk-ease);
+}
+
+.wk-second-link:hover,
+.wk-second-link:focus-visible {
+  text-decoration-color: var(--wk-accent);
+}
+
+.wk-second-link:focus-visible {
+  outline: 2px solid var(--wk-accent);
+  outline-offset: 4px;
+}
+
+.wk-second-mark {
+  font-size: 0.75rem;
+  color: var(--wk-muted);
+  transition:
+    transform 380ms var(--wk-ease),
+    color 240ms var(--wk-ease);
+}
+
+.wk-second-link:hover .wk-second-mark,
+.wk-second-link:focus-visible .wk-second-mark {
+  transform: translate(2px, -2px);
+  color: var(--wk-accent);
+}
+
+.wk-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.wk-second-line {
+  margin-top: 5px;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--wk-muted);
+  text-wrap: pretty;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 767px) {
+  .wk-spread {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    row-gap: 0;
+    padding: 60px 22px 72px;
+  }
+
+  .wk-spread > *,
+  .wk-figures > *,
+  .wk-seconds > * {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+
+  .wk-eyebrow {
+    margin-top: 8px;
+    text-align: left;
+  }
+
+  .wk-heading {
+    margin-top: 18px;
+    font-size: clamp(1.75rem, 8.5vw, 2.375rem);
+  }
+
+  .wk-standfirst {
+    margin-top: 20px;
+    max-width: none;
+  }
+
+  .wk-figures {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 18px;
+    margin-top: 30px;
+  }
+
+  .wk-figure-label {
+    max-width: none;
+  }
+
+  /* Spacing lives on the container now — putting it on each note would
+   * double up against the container's own gap. */
+  .wk-notes,
+  .wk-status {
+    margin-top: 26px;
+  }
+
+  .wk-note,
+  .wk-status {
+    max-width: none;
+  }
+
+  .wk-rule {
+    margin-top: 38px;
+  }
+
+  .wk-seconds {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 22px;
+    margin-top: 24px;
+  }
+}

@@ -1,0 +1,89 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Faces are registered in styles/fonts.ts; these are the site-wide handles. */
+  --font-display: 'Fraunces Variable', Georgia, 'Times New Roman', serif;
+  --font-body: 'Newsreader Variable', Georgia, 'Times New Roman', serif;
+
+  /*
+   * Shared horizontal page gutter. Every scene insets its content by this, so
+   * the shell's fixed motion toggle has a lane it can occupy without ever
+   * overlapping scene content — a horizontal gutter is the only reservation
+   * that holds at EVERY scroll position. The 72px floor is what guarantees
+   * room for the 46px control plus breathing space at narrow desktop widths.
+   */
+  --page-gutter: clamp(72px, 5.5vw, 88px);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background: #0e0e10;
+  color: #f5f5f5;
+}
+
+/* Scene pattern: the host reserves scroll space before the chunk loads, the
+ * track owns the scroll length, and the stage is what gets pinned. */
+.scene-host {
+  position: relative;
+}
+
+.scene-track {
+  position: relative;
+}
+
+.scene-stage {
+  height: 100svh;
+  overflow: hidden;
+}
+
+.scene-track[data-static] .scene-stage {
+  height: auto;
+  min-height: 100svh;
+  overflow: visible;
+}
+
+/*
+ * Reduced motion: neutralize animations, transitions, and smooth scrolling
+ * everywhere. Lenis and all GSAP work are separately disabled via
+ * usePrefersReducedMotion.
+ *
+ * Two selectors, one rule set. The media query catches the OS setting; the
+ * [data-motion] attribute — mirrored onto <html> by SmoothScroll — catches the
+ * on-page toggle, which the media query cannot see. Both must stay in sync.
+ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root[data-motion='reduced'] *,
+:root[data-motion='reduced'] *::before,
+:root[data-motion='reduced'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-delay: 0s !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  transition-delay: 0s !important;
+  scroll-behavior: auto !important;
+}

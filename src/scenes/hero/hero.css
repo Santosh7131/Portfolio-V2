@@ -1,0 +1,179 @@
+/*
+ * Hero — the cover. Same discipline as scene 3: hierarchy from scale and
+ * space, one accent (the cue tick), everything scoped to .hr-scene.
+ * CSS is authored at the settled state; GSAP animates `from` offsets, so the
+ * static tier renders the finished cover with no timeline at all.
+ */
+
+.hr-scene {
+  --hr-ink: oklch(0.97 0.004 262);
+  --hr-muted: oklch(0.62 0.008 262);
+  --hr-hairline: oklch(0.95 0.01 262 / 0.14);
+  --hr-accent: oklch(0.72 0.17 262);
+  background: oklch(0.135 0.006 262);
+  color: var(--hr-ink);
+  font-family: var(--font-body);
+}
+
+/* Grid container so the cover stretches to the full page in BOTH tiers —
+ * a definite 100svh when pinned, min-height:100svh when static. */
+.hr-scene .scene-stage {
+  display: grid;
+}
+
+.hr-inner {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  /* Slack above the name is smaller than below, seating the masthead just
+   * above true centre — where the eye expects it. */
+  grid-template-rows:
+    auto /* 1 · role | place */
+    auto /* 2 · rail */
+    1fr /* 3 · slack */
+    auto /* 4 · name */
+    auto /* 5 · line */
+    1.15fr /* 6 · slack */
+    auto; /* 7 · cue */
+  column-gap: clamp(16px, 2.2vw, 32px);
+  row-gap: clamp(10px, 1.6vh, 20px);
+  width: min(1400px, 100%);
+  margin-inline: auto;
+  padding: clamp(28px, 4.2vh, 56px) var(--page-gutter);
+}
+
+/* ---------- Top rail ---------- */
+
+.hr-role,
+.hr-place {
+  grid-row: 1;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--hr-muted);
+}
+
+.hr-role {
+  grid-column: 1 / span 6;
+}
+
+.hr-place {
+  grid-column: 7 / -1;
+  text-align: right;
+}
+
+.hr-rail {
+  display: block;
+  grid-column: 1 / -1;
+  grid-row: 2;
+  height: 1px;
+  margin-top: clamp(10px, 1.4vh, 18px);
+  background: var(--hr-hairline);
+  transform-origin: left center;
+}
+
+/* ---------- Masthead ---------- */
+
+.hr-name {
+  grid-column: 1 / -1;
+  grid-row: 4;
+  font-family: var(--font-display);
+  /* --hr-* are transiently driven by the intro; these fallbacks are the
+   * settled cut. */
+  font-variation-settings:
+    'opsz' var(--hr-opsz, 144),
+    'wght' var(--hr-wght, 350),
+    'SOFT' 0,
+    'WONK' 1;
+  font-size: clamp(3.5rem, 13vw, 11rem);
+  line-height: 1.06;
+  letter-spacing: -0.035em;
+  color: var(--hr-ink);
+}
+
+/* The baseline the word rises from. Overflow clips the pre-roll position;
+ * line-height 1.06 keeps ascenders inside the box at rest. */
+.hr-name-mask {
+  display: block;
+  overflow: hidden;
+}
+
+.hr-name-word {
+  display: block;
+}
+
+/* ---------- Cover line ---------- */
+
+.hr-line {
+  grid-column: 1 / span 6;
+  grid-row: 5;
+  max-width: 32ch;
+  margin-top: clamp(12px, 1.8vh, 22px);
+  font-size: clamp(1.05rem, 1.6vw, 1.5rem);
+  font-weight: 300;
+  line-height: 1.35;
+  color: var(--hr-muted);
+  text-wrap: pretty;
+}
+
+/* ---------- Scroll cue ---------- */
+
+.hr-cue {
+  display: flex;
+  grid-column: 8 / -1;
+  grid-row: 7;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+.hr-cue-tick {
+  display: block;
+  width: 1px;
+  height: 26px;
+  background: linear-gradient(to bottom, transparent, var(--hr-accent));
+}
+
+.hr-cue-label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hr-muted);
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 767px) {
+  .hr-inner {
+    grid-template-rows:
+      auto auto 1fr auto auto 1.15fr auto;
+    padding: 44px 22px 56px;
+  }
+
+  /* "Machine learning engineer" is too long to share a row with the location
+   * at this width, so the rail stacks rather than wrapping mid-label. */
+  .hr-role,
+  .hr-place {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  .hr-place {
+    margin-top: 5px;
+  }
+
+  .hr-name {
+    letter-spacing: -0.03em;
+  }
+
+  .hr-line {
+    grid-column: 1 / -1;
+    max-width: none;
+  }
+
+  .hr-cue {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+}

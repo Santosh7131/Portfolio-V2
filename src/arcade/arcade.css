@@ -1,0 +1,199 @@
+/*
+ * Arcade chrome. Same type and palette as the site, so the secret feels like
+ * part of the same designed object rather than a bare emulator in a box.
+ * Any decorative motion here is neutralised by the global reduced-motion
+ * rules; the game itself is user-initiated content and is never gated.
+ */
+
+.ar-root {
+  --ar-ink: oklch(0.97 0.004 262);
+  --ar-muted: oklch(0.62 0.008 262);
+  --ar-hairline: oklch(0.95 0.01 262 / 0.14);
+  --ar-accent: oklch(0.72 0.17 262);
+  --ar-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100svh;
+  background: oklch(0.135 0.006 262);
+  color: var(--ar-ink);
+  font-family: var(--font-body);
+}
+
+/* ---------- Top bar ---------- */
+
+.ar-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px clamp(20px, 4vw, 48px);
+  border-bottom: 1px solid var(--ar-hairline);
+}
+
+.ar-exit {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--ar-hairline);
+  border-radius: 10px;
+  background: none;
+  color: var(--ar-ink);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition:
+    border-color 200ms var(--ar-ease),
+    background-color 200ms var(--ar-ease);
+}
+
+.ar-exit:hover {
+  border-color: oklch(0.75 0.12 262 / 0.5);
+  background: oklch(0.72 0.17 262 / 0.1);
+}
+
+.ar-exit:focus-visible,
+.ar-coin:focus-visible {
+  outline: 2px solid var(--ar-accent);
+  outline-offset: 3px;
+}
+
+.ar-kicker {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ar-muted);
+}
+
+/* ---------- Stage ---------- */
+
+.ar-stage {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: clamp(24px, 4vh, 48px) clamp(20px, 4vw, 48px);
+}
+
+.ar-card {
+  max-width: 46ch;
+  text-align: center;
+}
+
+.ar-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ar-accent);
+}
+
+.ar-title {
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-variation-settings:
+    'opsz' 144,
+    'wght' 340,
+    'SOFT' 0,
+    'WONK' 1;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.ar-blurb {
+  margin-top: 16px;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ar-muted);
+  text-wrap: pretty;
+}
+
+.ar-coin {
+  min-height: 52px;
+  margin-top: 28px;
+  padding: 14px 30px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: var(--ar-accent);
+  color: oklch(0.17 0.04 262);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition:
+    background-color 200ms var(--ar-ease),
+    transform 160ms var(--ar-ease);
+}
+
+.ar-coin:hover:not(:disabled) {
+  background: oklch(0.78 0.16 262);
+}
+
+.ar-coin:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.ar-coin:disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.ar-hint {
+  margin-top: 18px;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--ar-muted);
+}
+
+.ar-hint kbd {
+  padding: 2px 6px;
+  border: 1px solid var(--ar-hairline);
+  border-radius: 4px;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 0.6875rem;
+}
+
+.ar-note,
+.ar-error {
+  margin-top: 24px;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--ar-muted);
+  text-wrap: pretty;
+}
+
+.ar-error {
+  color: oklch(0.72 0.16 25);
+}
+
+/* ---------- Emulator host ---------- */
+
+.ar-dos {
+  display: none;
+  width: 100%;
+  height: 100%;
+  min-height: min(70svh, 640px);
+}
+
+.ar-dos[data-active] {
+  display: block;
+}
+
+/* ---------- Legal ---------- */
+
+.ar-legal {
+  padding: 16px clamp(20px, 4vw, 48px) 22px;
+  border-top: 1px solid var(--ar-hairline);
+  font-size: 0.6875rem;
+  line-height: 1.6;
+  color: var(--ar-muted);
+  text-wrap: pretty;
+}
+
+.ar-legal a {
+  color: inherit;
+}
+
+.ar-legal code {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+}

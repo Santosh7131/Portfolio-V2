@@ -1,0 +1,120 @@
+/*
+ * Motion toggle — shell-level, fixed. Sits in the page's outer gutter on
+ * desktop (every scene pads its content in by 70–88px there), so it never
+ * overlaps scene content. Below 768px that gutter collapses to ~22px, so it
+ * moves to the bottom corner and takes a backdrop, reading as a floating
+ * layer rather than a collision.
+ *
+ * Its own transitions are neutralised by the global [data-motion='reduced']
+ * block — the control respects the setting it controls.
+ */
+
+.mt-root {
+  position: fixed;
+  top: 50%;
+  left: max(12px, env(safe-area-inset-left));
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(-50%);
+}
+
+.mt-switch {
+  display: grid;
+  place-items: center;
+  /* Comfortably past the 44px minimum target. */
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border: 1px solid oklch(0.95 0.01 262 / 0.14);
+  border-radius: 50%;
+  background: oklch(0.2 0.008 262 / 0.55);
+  color: oklch(0.72 0.008 262);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition:
+    color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mt-switch:hover {
+  border-color: oklch(0.95 0.01 262 / 0.26);
+  color: oklch(0.97 0.004 262);
+}
+
+.mt-switch:focus-visible {
+  outline: 2px solid oklch(0.72 0.17 262);
+  outline-offset: 3px;
+}
+
+.mt-switch[aria-disabled='true'] {
+  cursor: default;
+  opacity: 0.55;
+}
+
+/* Bars stagger when motion is on and level off when it isn't — the state is
+ * legible without colour, which keeps the accent free for focus alone. */
+.mt-glyph {
+  display: grid;
+  gap: 3px;
+  place-items: start;
+  width: 18px;
+}
+
+.mt-bar {
+  display: block;
+  height: 1.5px;
+  background: currentcolor;
+  border-radius: 1px;
+  transition: width 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.mt-switch[aria-checked='true'] .mt-bar:nth-child(1) {
+  width: 18px;
+}
+
+.mt-switch[aria-checked='true'] .mt-bar:nth-child(2) {
+  width: 11px;
+}
+
+.mt-switch[aria-checked='true'] .mt-bar:nth-child(3) {
+  width: 15px;
+}
+
+.mt-switch[aria-checked='false'] .mt-bar {
+  width: 13px;
+}
+
+.mt-note {
+  max-width: 15ch;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  color: oklch(0.62 0.008 262);
+}
+
+@media (max-width: 767px) {
+  .mt-root {
+    top: auto;
+    bottom: max(14px, env(safe-area-inset-bottom));
+    left: max(14px, env(safe-area-inset-left));
+    align-items: flex-end;
+    transform: none;
+  }
+
+  /*
+   * No scroll-invariant lane exists here: the mobile gutter is 22px and the
+   * control is 46px, and widening the gutter enough would cost a fifth of the
+   * content width. So it floats — and the backdrop is opaque enough that it
+   * reads as chrome sitting above the page rather than a collision with it.
+   */
+  .mt-switch {
+    background: oklch(0.17 0.008 262 / 0.86);
+    border-color: oklch(0.95 0.01 262 / 0.2);
+  }
+
+  .mt-note {
+    max-width: 12ch;
+  }
+}

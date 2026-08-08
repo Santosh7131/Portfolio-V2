@@ -1,0 +1,38 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Private reference material — NEVER commit. This repo is public, and these PDFs
+# carry a phone number and a personal email. The scenes are written from them,
+# but the sources stay on disk only. Do not remove this rule.
+Context/
+
+# The literals the resume redaction scripts strip and search for. Hardcoding them
+# in the scripts would publish the exact string they exist to remove — which is
+# what happened once. Keep them here, out of the repo.
+scripts/redaction-targets.json
+
+# Static font instances that scripts/build-brand-assets.py derives from
+# node_modules on each run. Regenerated, never edited.
+scripts/.fontcache/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

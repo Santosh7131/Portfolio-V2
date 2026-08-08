@@ -1,0 +1,152 @@
+/*
+ * Scene 2 — Motion ("Heft"). Shares Scene 1's token recipe at its default
+ * values (hue 262, radius 10, soft elevation) for cohesion — scoped to
+ * .mo-scene, nothing leaks to :root. CSS is authored at the settled state.
+ *
+ * Transform ownership: GSAP owns the OUTER .mo-chip transform (position,
+ * rotation); CSS owns the INNER .mo-chip-face lift (scale + shadow via the
+ * .is-held class) — so the lift transition never fights per-frame GSAP
+ * writes, and the global reduced-motion block neutralizes it for free.
+ */
+
+.mo-scene {
+  --mo-hue: 262;
+  --mo-accent: oklch(0.72 0.17 var(--mo-hue));
+  --mo-accent-border: oklch(0.75 0.12 var(--mo-hue) / 0.4);
+  --mo-surface: oklch(0.215 0.014 var(--mo-hue));
+  --mo-surface-top: oklch(0.245 0.016 var(--mo-hue));
+  --mo-line: oklch(0.85 0.02 var(--mo-hue) / 0.12);
+  --mo-text: #f5f5f5;
+  --mo-muted: #8a8a93;
+  --mo-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --mo-radius: 10px;
+  background: oklch(0.135 0.006 var(--mo-hue));
+  color: var(--mo-text);
+}
+
+.mo-scene .scene-stage {
+  position: relative;
+}
+
+/* ---------- Editorial frame ---------- */
+
+.mo-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 560px;
+  padding: 64px var(--page-gutter);
+  /* Header text sits above the play field; don't let it block grabs. */
+  pointer-events: none;
+  z-index: 2;
+}
+
+.mo-kicker {
+  color: var(--mo-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.mo-heading {
+  margin-top: 12px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.mo-support {
+  margin-top: 12px;
+  color: var(--mo-muted);
+  font-size: 0.9375rem;
+}
+
+/* ---------- The chips ---------- */
+
+.mo-field {
+  position: absolute;
+  inset: 0;
+}
+
+.mo-chip {
+  position: absolute;
+  touch-action: none; /* chip drags must never fight page scroll on touch */
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+
+.mo-chip.is-held {
+  cursor: grabbing;
+}
+
+/* Elevated while in motion (held, flying, settling, or gliding home) so a
+ * thrown chip never snaps behind the header or a sibling mid-flight. Kept
+ * separate from .is-held, which is removed the instant the pointer lifts. */
+.mo-chip.is-live {
+  z-index: 10;
+}
+
+.mo-chip-face {
+  display: grid;
+  place-items: center;
+  min-height: 48px;
+  padding: 14px 22px;
+  background: linear-gradient(180deg, var(--mo-surface-top), var(--mo-surface));
+  border: 1px solid var(--mo-line);
+  border-radius: calc(var(--mo-radius) * 1.4);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.06),
+    0 1px 2px oklch(0.05 0.02 var(--mo-hue) / 0.5),
+    0 10px 24px -8px oklch(0.05 0.02 var(--mo-hue) / 0.55);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+  transition:
+    transform 180ms var(--mo-ease),
+    box-shadow 220ms var(--mo-ease),
+    border-color 140ms var(--mo-ease);
+}
+
+.mo-chip.is-held .mo-chip-face {
+  transform: scale(1.05);
+  border-color: var(--mo-accent-border);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.08),
+    0 2px 4px oklch(0.05 0.02 var(--mo-hue) / 0.4),
+    0 24px 56px -12px oklch(0.05 0.02 var(--mo-hue) / 0.75);
+}
+
+/* ---------- Static tier (reduced motion / mobile) ---------- */
+
+.mo-scene[data-static] .scene-stage {
+  display: flex;
+  flex-direction: column;
+}
+
+.mo-scene[data-static] .mo-header {
+  position: static;
+  max-width: none;
+  padding: 56px 20px 0;
+  pointer-events: auto;
+}
+
+.mo-scene[data-static] .mo-field {
+  position: static;
+  /* Absorb the stage's leftover height so chips center in the real space
+   * instead of leaving a dead band at the bottom (min-height is the floor). */
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 45svh;
+  padding: 48px 20px 72px;
+}
+
+.mo-scene[data-static] .mo-chip {
+  position: static;
+}
