@@ -171,11 +171,13 @@
   transform-origin: left center;
 }
 
+/* Three across, not two: the tier carries three projects and an orphan on a
+ * second row reads as an afterthought rather than a set. */
 .wk-seconds {
   display: grid;
   grid-column: 1 / -1;
   grid-row: 8;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   column-gap: clamp(16px, 2.2vw, 32px);
   row-gap: 16px;
   list-style: none;

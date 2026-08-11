@@ -38,22 +38,38 @@ const FIGURES = [
   { value: '2.2–5.2×', label: 'throughput after a threading fix' },
 ]
 
-// hrefs come from the résumé's own link annotations — the same destinations
-// that PDF points at, not new claims about where these live.
+/*
+ * Every line here is written from the linked repository itself, not from a
+ * remembered description. That rule exists because it has already failed once:
+ * the AURA entry claimed "FastAPI + React TypeScript", which the repo it links
+ * does not contain (it is Flask + Jinja — app.py + templates/, no package.json).
+ * The identical claim was caught and corrected on the GitHub profile in Aug 2026
+ * and survived here, because a card drifts from its repo silently. Re-read the
+ * repo before editing any line below.
+ *
+ * The Wells Fargo Ideathon and SRM IoT Expo placings are deliberately absent:
+ * awards stay off profiles and write-ups by standing decision. They remain true
+ * and stay on the résumé; they are not selling points.
+ *
+ * `href: null` means there is deliberately nothing to link. XtractIQ's Render
+ * demo serves an empty page — a link a reader clicks and finds broken is worse
+ * than no link at all.
+ */
 const SECONDARY = [
   {
-    name: 'XtractIQ',
-    href: 'https://xtract-iq-frontend.onrender.com',
-    line: 'Document data extractor. React + TypeScript with an OCR and LLM pipeline; fifteen scanned forms in ten seconds; schema-free extraction into PostgreSQL.',
+    name: 'AI Learns To Drive',
+    href: 'https://github.com/Santosh7131/AI-Learns-To-Drive',
+    line: 'A Transformer policy trained with PPO to race with no hand-coded rules. The trained network was ported to TypeScript and WGSL and validated against the Python original to ~1e-5, so it runs batched on the visitor’s own GPU with no backend.',
   },
   {
     name: 'AURA',
-    href: 'https://github.com/Santosh7131/AURA-Preprocessor',
-    // The Wells Fargo Ideathon placing is deliberately NOT mentioned. Santosh's
-    // standing decision (vault: decision-log, 2026-08-07) is that awards stay off
-    // profiles and write-ups — they remain true and stay on the résumé, but they
-    // are not selling points. Same for the SRM IoT Expo placing.
-    line: 'AI-powered ML data-preprocessing platform. FastAPI + React TypeScript, with fifteen preprocessing modules on pandas and scikit-learn.',
+    href: 'https://github.com/Santosh7131/Aura-Preprocessor',
+    line: 'LLM-guided, human-in-the-loop data preprocessing: reads a raw dataset and proposes the cleaning decisions, on Python, Flask, pandas and scikit-learn with the Groq API.',
+  },
+  {
+    name: 'XtractIQ',
+    href: null,
+    line: 'Document data extractor. An OCR and LLM pipeline doing schema-free extraction from scanned forms into PostgreSQL.',
   },
 ]
 
@@ -156,19 +172,26 @@ export default function WorkScene({ id }: SceneProps) {
             {SECONDARY.map((s) => (
               <li key={s.name} className="wk-second">
                 <h3 className="wk-second-name">
-                  <a
-                    className="wk-second-link"
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {s.name}
-                    <span className="wk-second-mark" aria-hidden="true">
-                      ↗
-                    </span>
-                    {/* Announced, not shown — as in the closing scene. */}
-                    <span className="wk-sr">(opens in a new tab)</span>
-                  </a>
+                  {s.href ? (
+                    <a
+                      className="wk-second-link"
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {s.name}
+                      <span className="wk-second-mark" aria-hidden="true">
+                        ↗
+                      </span>
+                      {/* Announced, not shown — as in the closing scene. */}
+                      <span className="wk-sr">(opens in a new tab)</span>
+                    </a>
+                  ) : (
+                    /* No link by design (see SECONDARY). Rendered as plain text
+                       rather than a dead anchor, so nothing offers a click that
+                       goes nowhere. */
+                    s.name
+                  )}
                 </h3>
                 <p className="wk-second-line">{s.line}</p>
               </li>
