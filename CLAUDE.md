@@ -28,7 +28,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 A scroll-driven portfolio where scrolling scrubs an authored timeline of full-height "scenes" — cinematic, WebGL-accented, playful. The quality bar is set by activetheory.net, bruno-simon.com, and dustinbrett.com.
 
-The site belongs to a frontend designer, and its #1 job is to be **live proof** of fancy, polished, technically proficient UI work — the site itself is the primary work sample. Every detail should read as the work of a top-tier 2026 designer: obsessive polish, considered motion, zero templated or default-looking choices. Copy is show-don't-tell — confident but understated; let the craft brag.
+The site belongs to a **machine learning engineer**. Its #1 job is to make his engineering legible; the site's own craft is the supporting argument, not the thesis. Every detail should still read as the work of a top-tier 2026 designer — obsessive polish, considered motion, zero templated or default-looking choices — because a portfolio that is visibly well built earns trust for the claims inside it. Copy is show-don't-tell: confident but understated; let the craft brag.
+
+> **This paragraph used to read "The site belongs to a frontend designer," and that sentence did real damage.** It was the original brief. The positioning was corrected to machine learning engineer in Aug 2026 and the biography was written to match, but this file was not updated — so every later session read "frontend designer" as the standing instruction. The consequences were still on the live site months later: a colophon line reading "Frontend Designer" directly beneath a closer calling him a machine learning engineer, a 200-word essay about type and white space as the longest prose on the site, and 52% of total scroll length spent arguing for a job he is not applying for. If the positioning ever changes again, **this paragraph changes first.**
 
 ### The arcade (hidden extra — not a scene)
 
@@ -41,13 +43,25 @@ The site belongs to a frontend designer, and its #1 job is to be **live proof** 
 
 ### Scenes / work
 
-Three showpiece scenes, each proving a different design muscle:
+Three showpiece scenes, each proving a different craft muscle:
 
 1. **Systems & craft** — an interactive mini design system / component playground.
 2. **Interaction & motion** — one signature interaction built to perfection (the wow).
 3. **Visual & type** — an editorial/typographic scene with striking hierarchy and type.
 
-If 1–2 real projects genuinely look great, swap one showpiece for a live case study — but never a flat screenshot that breaks the cinematic feel.
+These are **evidence, not the argument.** They exist so a reader can see the work is real without being told; the substance is `profile/` and `work/`.
+
+**Scroll length is the site's actual statement of priorities**, because it is what a visitor spends. Keep the craft triad at or below the substance scenes. Current budget, total 1400svh:
+
+| | | |
+|---|---|---|
+| covers | hero 170 · closing 100 | 270svh — 19% |
+| **substance** | **profile 220 · work 320** | **540svh — 39%** |
+| craft | systems 190 · motion 210 · editorial 190 | 590svh — 42% |
+
+`work/` should stay the longest single scene on the site. It was not, until Aug 2026: the craft triad held 840svh of 1610 (52%) against 500svh (31%) for profile and work, and `motion/` — eight draggable chips — was the longest scene on the site at 340svh, longer than the TalbotIQ engine and the whole CV combined. Nobody decided that; the triad was budgeted under the old brief and never re-costed when the positioning changed.
+
+If a real project genuinely looks great, swap one showpiece for a live case study — but never a flat screenshot that breaks the cinematic feel.
 
 **Build approach:** polished DOM/CSS/Canvas/GSAP with selective WebGL accents — NOT a heavy 3D-model pipeline. Quality over quantity: 3 flawless scenes beat 8 okay ones.
 
@@ -65,7 +79,24 @@ A single-page personal website: a scroll-driven magazine. Seven scenes, in regis
 
 Work sits directly after profile: who he is, then what he built, with the two showpiece scenes following as craft evidence. The scene kickers are numbered in scroll order (`01 — Profile` … `05 — Craft`) and `work.css`'s header comment carries the same number, so **reordering the registry means renumbering all of them together**. The numbering in `systems.css`, `motion.css` and `editorial.css` headers is a *different* scheme — the showpiece triad from "Scenes / work" above — and does not track scroll position.
 
-Positioning is **machine learning engineer** — the hero rail, hero cover line, editorial closer and closing rail all state it. If that ever changes, those four strings change together.
+Positioning is **machine learning engineer**, stated in **six** visitor-facing strings:
+
+| Where | Selector | File |
+|---|---|---|
+| hero rail | `.hr-role` | `hero/HeroScene.tsx` |
+| hero cover line | `.hr-line` | `hero/HeroScene.tsx` |
+| profile heading | `.pr-heading` | `profile/ProfileScene.tsx` |
+| editorial closer | `.ed-closer` | `editorial/EditorialScene.tsx` |
+| editorial colophon | `.ed-meta` | `editorial/EditorialScene.tsx` |
+| closing rail | `.cl-role` | `closing/ClosingScene.tsx` |
+
+If it ever changes, all six change together — plus the "What this site is" paragraph above.
+
+**This list said *four* until Aug 2026, and it was wrong twice over.** It omitted `.ed-meta`, which is why the live site shipped "Frontend Designer" in a colophon two lines under a closer calling him a machine learning engineer. It also omitted `.pr-heading` — found only by running the grep below while correcting the first omission, which means the list had been wrong about its own count in a second place nobody had noticed. A count is a safeguard only if it is complete, and this one demonstrably was not: **grep for the role strings; do not trust this table.**
+
+```bash
+grep -rn "engineer\|Designer" src/scenes/*/[A-Z]*.tsx
+```
 
 ### Biographical content — accuracy rules
 
