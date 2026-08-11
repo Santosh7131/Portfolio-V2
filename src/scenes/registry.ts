@@ -26,22 +26,22 @@ export const scenes: SceneEntry[] = [
     // scenes (systems, motion) follow as craft evidence rather than preamble.
     id: 'work',
     loader: () => import('./work/WorkScene'),
-    height: '280svh',
+    height: '320svh',
   },
   {
     id: 'systems',
     loader: () => import('./systems/SystemsScene'),
-    height: '240svh',
+    height: '190svh',
   },
   {
     id: 'motion',
     loader: () => import('./motion/MotionScene'),
-    height: '340svh',
+    height: '210svh',
   },
   {
     id: 'editorial',
     loader: () => import('./editorial/EditorialScene'),
-    height: '260svh',
+    height: '190svh',
   },
   {
     // Last, and unpinned: exactly one viewport, so the document ends flush

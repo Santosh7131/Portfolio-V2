@@ -6,7 +6,7 @@ import { SCENE_MOBILE_QUERY, type SceneProps } from '../types'
 import './editorial.css'
 
 /** Scroll length in animated mode — MUST equal this scene's registry height. */
-const TRACK_HEIGHT = '260svh'
+const TRACK_HEIGHT = '190svh'
 
 /**
  * Scene 3 — Visual & type. An art-directed opening spread; the still frame is

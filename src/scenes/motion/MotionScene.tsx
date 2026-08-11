@@ -8,7 +8,7 @@ import { CHIPS, PHYSICS } from './chips'
 import './motion.css'
 
 /** Scroll length in animated mode — MUST equal this scene's registry height. */
-const TRACK_HEIGHT = '340svh'
+const TRACK_HEIGHT = '210svh'
 
 /**
  * Per-chip physics state. One gsap.ticker callback integrates every active

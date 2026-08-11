@@ -23,7 +23,7 @@ import Specimens from './specimens'
 import './systems.css'
 
 /** Scroll length in animated mode — MUST equal this scene's registry height. */
-const TRACK_HEIGHT = '240svh'
+const TRACK_HEIGHT = '190svh'
 
 type RangeControlProps = {
   label: string

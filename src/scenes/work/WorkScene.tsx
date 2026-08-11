@@ -6,7 +6,7 @@ import { SCENE_MOBILE_QUERY, type SceneProps } from '../types'
 import './work.css'
 
 /** MUST equal this scene's registry height. */
-const TRACK_HEIGHT = '280svh'
+const TRACK_HEIGHT = '320svh'
 
 /*
  * ─────────────────────────────────────────────────────────────────────────────
