@@ -25,6 +25,9 @@
   --ds-mono: ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
   background: oklch(0.16 0.008 var(--ds-hue));
   color: var(--ds-text);
+  /* Declared explicitly, as every other scene does. Inheriting it from body
+   * worked, but left this scene's type silently dependent on the shell. */
+  font-family: var(--font-body);
   transition: background-color 180ms var(--ds-ease);
 }
 
@@ -92,11 +95,21 @@
   letter-spacing: 0.2em;
 }
 
+/* Fraunces at the same cut the other scene headings use. This scene and Motion
+ * were built before the site had real faces and never got them, so their
+ * headings were rendering in the READING face while five scenes used the
+ * display face — on a site whose argument is typographic control. */
 .ds-heading {
   margin-top: 12px;
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-variation-settings:
+    'opsz' 144,
+    'wght' 340,
+    'SOFT' 0,
+    'WONK' 1;
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
 }
 
 .ds-support {
