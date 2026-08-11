@@ -134,7 +134,8 @@
 
 /*
  * Drop cap. ::first-letter (not a wrapper span) so the first word stays one
- * intact text node — screen readers read “Design”, and selection/copy behave.
+ * intact text node — screen readers read “Engineering”, and selection/copy
+ * behave.
  * initial-letter does true cap-height and baseline alignment; the float
  * fallback below only runs where neither spelling is supported (Firefox).
  */

@@ -125,23 +125,25 @@ export default function EditorialScene({ id }: SceneProps) {
             {/* Drop cap is ::first-letter, not a wrapper span — the word stays
                 one intact text node for screen readers and text selection. */}
             <p className="ed-lead">
-              Design is the work of making a thousand small choices and hiding
-              every one of them. The size of this line against the last. The
-              space that lets it breathe. The single accent colour, used once,
-              so that it means something. Done well, none of it announces
-              itself — you simply feel that things sit in their right place.
+              Engineering is the work of making a thousand small choices and
+              hiding every one of them. The model that fits in memory because of
+              what was left out of it. The request path with nothing clever in
+              it. The number picked once, deliberately, so everything after it
+              can be relied on. Done well, none of it announces itself — the
+              thing simply runs, on hardware nobody had to buy.
             </p>
             <p>
-              That invisibility is the craft. Anyone can add; a designer knows
-              what to remove. The restraint you cannot see is the part that took
-              the longest.
+              That invisibility is the craft. Anyone can add a layer, a
+              dependency, another model; the harder discipline is taking them
+              away until what is left is small enough to trust. The restraint
+              you cannot see is the part that took the longest.
             </p>
           </div>
 
           <div className="ed-quote-block">
             <span className="ed-quote-rule" aria-hidden="true" />
             <blockquote className="ed-quote">
-              <p>“Anyone can add. A designer knows what to remove.”</p>
+              <p>“Anyone can add. Engineering is knowing what to remove.”</p>
             </blockquote>
           </div>
 
@@ -154,8 +156,16 @@ export default function EditorialScene({ id }: SceneProps) {
               things that look inevitable and feel effortless, which is to say,
               things that were neither.
             </p>
+            {/* The role string here is the FIFTH place the positioning appears.
+                The four documented ones — hero rail, hero cover line, this
+                scene's closer, closing rail — were all updated when the
+                positioning changed and this one was missed, so it read
+                "Frontend Designer" on the live site directly beneath a closer
+                calling him a machine learning engineer. Any future change to
+                the positioning has to touch all five. */}
             <p className="ed-meta">
-              Frontend Designer · Chennai, India · 2026 · Selected words on craft
+              Machine learning engineer · Chennai, India · 2026 · Notes on the
+              work
             </p>
           </div>
         </article>
